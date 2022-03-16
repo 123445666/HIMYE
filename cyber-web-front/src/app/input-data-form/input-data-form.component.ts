@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { HttpClient } from "@angular/common/http";
+import { FormBuilder } from '@angular/forms';
 import { Router } from "@angular/router";
 import { CompanyService } from '../services/company.service';
 
@@ -13,10 +12,9 @@ import { CompanyService } from '../services/company.service';
 export class InputDataFormComponent implements OnInit {
   submitted = false;
   companyForm = this.formBuilder.group({
-    name: ''
+    name: [''],
+    domain: ['']
   });
-
-  company = {name: 'Dr.'};
 
   constructor(
     private _companyService: CompanyService, private router: Router, private formBuilder: FormBuilder,
@@ -31,7 +29,6 @@ export class InputDataFormComponent implements OnInit {
   onSubmit()
   {
   	this.submitted = true;
-
     this._companyService.getEmploy(this.companyForm.value).subscribe(
       response=>{
         let path = '/';
