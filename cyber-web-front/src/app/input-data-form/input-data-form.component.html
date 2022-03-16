@@ -1,5 +1,41 @@
-<div>
+<div class="text-center">
+  <img src="/assets/black-icon.png" class="rounded" alt="...">
+</div>
 
+<div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Nom de la société" aria-label="Nom de la société">
+  <span class="input-group-text"></span>
+  <input type="text" class="form-control" placeholder="Nom de domaine" aria-label="Nom de domaine">
+
+  <button type="button" class="btn btn-dark">Search</button>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="row">#</th>
+      <td colspan="#" class="table-active">Photo</td>
+      <td class="table-active">Nom</td>
+      <td class="table-active">Prénom</td>
+      <td class="table-active">Adresse mail</td>
+      <td class="table-active">Nombre de site inscript</td>
+      <td class="table-active">Sites web inscript</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td class="table-active">...</td>
+      <td class="table-active">....</td>
+      <td class="table-active">....</td>
+      <td class="table-active">....</td>
+      <td class="table-active">......</td>
+      <td class="table-active">.......</td>
+    </tr>
+
+  </tbody>
+</table>
+<div style="display:none;">
   <h2>Company Form</h2>
   <form [formGroup]="companyForm" (ngSubmit)="onSubmit()">
     <div>
