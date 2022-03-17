@@ -27,29 +27,44 @@ router.post('/', jsonParser, async function (req, res) {
   res.send(JSON.stringify(req.body));
 });
 
-router.post('/checkEmploy', jsonParser, async function (req, res) {
+router.get('/checkEmploy/:id', async function (req, res, next) {
 
   const { exec } = require('child_process');
 
-  var email = req.body.email;
-  var companyName = req.body.companyName;
-  var emailReplace = email.replace('@', '_').replace(/\./g,'_');
-  console.log(emailReplace);
+  var ObjectID = require('mongodb').ObjectID;
 
-  let yourscriptholele = exec(`/home/vietvb/Keyce/Code/cyber_web_local2/cyber-web-front/holehe.sh "${email}" "${emailReplace}" "${companyName}"`,
-    (error, stdout, stderr) => {
-      if (error !== null) {
-        console.log(`exec error: ${error}`);
+  var email = "";
+  var companyName = "";
+
+  await EmployeeModel.findById(req.params.id).select('-__v')
+    .then(async (employ) => {
+      if (employ) {
+        email = employ.email_pro;
+        companyName = employ.company;
+
+        var emailReplace = email.replace('@', '_');
+        emailReplace = emailReplace.replace(/\./g, '_');
+
+        console.log(2);
+
+        let yourscriptholele = exec(`/home/vietvb/Keyce/Code/cyber_web_local2/cyber-web-front/holehe.sh "${email}" "${emailReplace}" "${companyName}"`,
+          (error, stdout, stderr) => {
+            if (error !== null) {
+              console.log(`exec error: ${error}`);
+            }
+          });
+
+        const filter = { "_id" : employ._id };
+
+        const update = { web_account: emailReplace + "_" + companyName + ".txt" };
+
+        await EmployeeModel.findOneAndUpdate(filter, update);
+
+        res.send(JSON.stringify(companyName));
       }
+    }).catch(err => {
+      res.send(JSON.stringify(err));
     });
-
-  const filter = { email_pro: email, company: companyName };
-
-  const update = { web_account: emailReplace + "_" + companyName + ".txt" };
-
-  await EmployeeModel.findOneAndUpdate(filter, update);
-
-  res.send(JSON.stringify("ok"));
 })
 
 router.post('/getemployees', jsonParser, async function (req, res) {

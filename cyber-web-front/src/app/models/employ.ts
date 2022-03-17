@@ -1,4 +1,5 @@
 export interface Employ {
+  _id: string,
   name: string;
   lastname: string;
   firstname: string;

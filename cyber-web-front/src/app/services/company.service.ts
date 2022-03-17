@@ -29,4 +29,8 @@ export class CompanyService {
     let params = JSON.stringify(company);
     return this._http.post(this.url + `/company/getemployees/`, params, httpOptions);
   }
+
+  checkEmploy(id: String): Observable<any> {
+    return this._http.get(this.url + `/company/checkEmploy/${id}`);
+  }
 }
