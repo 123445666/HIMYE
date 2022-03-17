@@ -3,6 +3,7 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var companyService = require('../services/service.company')
 var EmployeeModel = require('../models/employee.model.js');
+const { route } = require('express/lib/application');
 
 var jsonParser = bodyParser.json();
 
@@ -45,8 +46,6 @@ router.get('/checkEmploy/:id', async function (req, res, next) {
         var emailReplace = email.replace('@', '_');
         emailReplace = emailReplace.replace(/\./g, '_');
 
-        console.log(2);
-
         let yourscriptholele = exec(`/home/vietvb/Keyce/Code/cyber_web_local2/cyber-web-front/holehe.sh "${email}" "${emailReplace}" "${companyName}"`,
           (error, stdout, stderr) => {
             if (error !== null) {
@@ -54,7 +53,7 @@ router.get('/checkEmploy/:id', async function (req, res, next) {
             }
           });
 
-        const filter = { "_id" : employ._id };
+        const filter = { "_id": employ._id };
 
         const update = { web_account: emailReplace + "_" + companyName + ".txt" };
 
@@ -87,5 +86,10 @@ router.post('/getemployees', jsonParser, async function (req, res) {
     })
 
 });
+
+router.delete('/:company', async function (req, res) {
+  await EmployeeModel.deleteMany({ company: req.params.company });
+  res.send(JSON.stringify(req.params.company));
+})
 
 module.exports = router;

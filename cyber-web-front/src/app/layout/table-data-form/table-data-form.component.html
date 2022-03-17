@@ -1,4 +1,4 @@
-<button type="submit" class="btn btn-dark">Supprimer</button>
+<button class="btn btn-dark" (click)="deleteCompanyEvent()">Supprimer</button>
 <hr/>
 <table class="table table-striped">
   <thead>
@@ -22,7 +22,7 @@
        <td>{{em.company}}</td>
        <td>{{em.email_pro}}</td>
        <td >
-         <a *ngIf="em.web_account != '-NA-'" href="/assets/data/{{em.web_account}}">Link</a>
+         <a *ngIf="em.web_account != '-NA-' && showMe" href="/assets/data/{{em.web_account}}">Link</a>
          <a class="btn btn-dark" *ngIf="em.web_account == '-NA-'" href="/company/checkemploy/{{em._id}}">Check</a>
         </td>
     </tr>
