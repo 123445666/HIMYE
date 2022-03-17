@@ -1,0 +1,22 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <td scope="col" class="table-active">Photo</td>
+      <td colspan="#" class="table-active">Nom</td>
+      <td  scope="col" class="table-active">Linkedin</td>
+      <td  scope="col" class="table-active">Profil</td>
+      <td  scope="col" class="table-active">Société</td>
+      <td  scope="col" class="table-active">Email</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let em of employs">
+       <td><img src='{{em.image}}' style="width:90px" /></td>
+       <td>{{em.name}}</td>
+       <td><a href='{{em.linkedin}}'>{{em.linkedin}}</a></td>
+       <td>{{em.snippet}}</td>
+       <td>{{em.company}}</td>
+       <td>{{em.email_perso}}</td>
+    </tr>
+  </tbody>
+</table>

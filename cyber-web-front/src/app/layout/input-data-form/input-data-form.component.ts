@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from "@angular/router";
-import { CompanyService } from '../services/company.service';
+import { FormArray } from '@angular/forms';
+import { CompanyService } from '../../services/company.service';
 
 @Component({
-  selector: 'input-data-form',
+  selector: 'app-input-data-form',
   templateUrl: './input-data-form.component.html',
   styleUrls: ['./input-data-form.component.css'],
   providers: [CompanyService],
@@ -21,20 +22,25 @@ export class InputDataFormComponent implements OnInit {
   ) {
   }
 
-  ngOnInit()
-  {
-
+  ngOnInit() {
+    this.companyForm.get("name").valueChanges.subscribe(selectedValue => {
+      this.submitted = false;
+    })
+    this.companyForm.get("domain").valueChanges.subscribe(selectedValue => {
+      this.submitted = false;
+    })
   }
 
-  onSubmit()
-  {
-  	this.submitted = true;
-    this._companyService.getEmploy(this.companyForm.value).subscribe(
-      response=>{
+  onSubmit() {
+    this.submitted = true;
+    this.companyForm.value.name = this.companyForm.value.name.toLowerCase();
+    this.companyForm.value.domain = this.companyForm.value.domain.toLowerCase();
+    this._companyService.importEmploys(this.companyForm.value).subscribe(
+      response => {
         let path = '/';
-	      this.router.navigate([path]);
+        this.router.navigate([path]);
       },
-      error=>{
+      error => {
         console.log(<any>error);
       });
   }
