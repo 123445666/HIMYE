@@ -1,5 +1,7 @@
 export interface Employ {
   name: string;
+  lastname: string;
+  firstname: string;
   linkedin: string;
   snippet: string;
   company: string;
@@ -9,6 +11,7 @@ export interface Employ {
   phone: string;
   hobby: string;
   social_account: string;
+  web_account: string;
   images: string;
   role: string;
   location: string;

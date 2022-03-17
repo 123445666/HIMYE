@@ -9,6 +9,16 @@ const employeeSchema = new Schema({
     type: String,
     required: true
   },
+  name:
+  {
+    type: String,
+    required: true
+  },
+  name:
+  {
+    type: String,
+    required: true
+  },
   linkedin:
   {
     type: String,
@@ -37,6 +47,9 @@ const employeeSchema = new Schema({
     type: Number,
   },
   social_account: {
+    type: String,
+  },
+  web_account: {
     type: String,
   },
   images: {

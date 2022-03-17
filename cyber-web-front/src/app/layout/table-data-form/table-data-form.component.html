@@ -1,3 +1,4 @@
+<button type="submit" class="btn btn-dark">Suprimer Data</button>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -7,16 +8,22 @@
       <td  scope="col" class="table-active">Profil</td>
       <td  scope="col" class="table-active">Société</td>
       <td  scope="col" class="table-active">Email</td>
+      <td  scope="col" class="table-active">Site</td>
     </tr>
   </thead>
   <tbody>
+    <tr><td colspan="7"> The Data update automatically, please refresh if you don't see anything</td></tr>
     <tr *ngFor="let em of employs">
        <td><img src='{{em.image}}' style="width:90px" /></td>
        <td>{{em.name}}</td>
        <td><a href='{{em.linkedin}}'>{{em.linkedin}}</a></td>
        <td>{{em.snippet}}</td>
        <td>{{em.company}}</td>
-       <td>{{em.email_perso}}</td>
+       <td>{{em.email_pro}}</td>
+       <td >
+         <a *ngIf="em.web_account != '-NA-'" href="/assets/data/{{em.web_account}}">Link</a>
+         <button class="" *ngIf="em.web_account == '-NA-'" href="/assets/data/company/checkEmploy/">Check</button>
+        </td>
     </tr>
   </tbody>
 </table>
