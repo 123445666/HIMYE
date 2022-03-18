@@ -13,6 +13,7 @@ yarn-error.log
 package-lock.json
 *.log
 *.gz
+.env
 
 # IDEs and editors
 .idea/

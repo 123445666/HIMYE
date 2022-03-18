@@ -22,6 +22,7 @@
        <td>{{em.company}}</td>
        <td>{{em.email_pro}}</td>
        <td >
+         <a class="btn btn-dark" *ngIf="em.web_account != '-NA-' && showMe" href="/company/checkemploy/{{em._id}}">Recheck</a>
          <a *ngIf="em.web_account != '-NA-' && showMe" href="/assets/data/{{em.web_account}}">Link</a>
          <a class="btn btn-dark" *ngIf="em.web_account == '-NA-'" href="/company/checkemploy/{{em._id}}">Check</a>
         </td>
